@@ -11,6 +11,7 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
   const getKeyBtnRef = useRef<HTMLButtonElement>(null);
   const [isLocked, setIsLocked] = useState(!hasKey);
   const [displayLockedInfo, setDisplayLockedInfo] = useState(false);
+  const feedbackId = "feedback-locked-info";
 
   const handleGettingTheKey = () => {
     if (isLocked) {
@@ -44,6 +45,7 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
         ref={getKeyBtnRef}
         type="button"
         aria-disabled={isLocked}
+        aria-describedby={displayLockedInfo ? feedbackId : undefined}
         onClick={handleGettingTheKey}
       >
         Get the key
@@ -93,7 +95,7 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
       </form>
 
       <div aria-live="assertive">
-        <p hidden={!displayLockedInfo}>
+        <p id={feedbackId} hidden={!displayLockedInfo}>
           You can't get the key because the box is locked.
         </p>
       </div>
