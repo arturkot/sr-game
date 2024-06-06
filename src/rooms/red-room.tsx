@@ -33,6 +33,7 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
       <TitleUpdater
         title={hasKey ? "Red Room: you have the red key" : "Red Room"}
       />
+      <Link href="/closed-door">Go back to the room with the closed door</Link>
       <h1>Red Room</h1>
       <p>
         You're in a room with concrete walls. It's tinted red due to the
@@ -50,8 +51,6 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
       >
         Get the key
       </button>
-
-      <Link href="/closed-door">Go back to the room with the closed door</Link>
 
       <form onSubmit={handleUnlocking}>
         <h2>Unlock the box</h2>
