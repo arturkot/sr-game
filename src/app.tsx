@@ -6,8 +6,8 @@ import { ClosedDoor } from "./rooms/closed-door";
 import { RedRoom } from "./rooms/red-room";
 import { useState } from "preact/hooks";
 import { BlueRoom } from "./rooms/blue-room";
-
-type InventoryItem = "red-key" | "blue-key";
+import { InventoryItem } from "./types";
+import { Success } from "./rooms/success";
 
 export function App() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -20,7 +20,10 @@ export function App() {
       <div id={titleUpdaterContainerId} />
       <Router>
         <Route path="/" component={TheGate} />
-        <Route path="/closed-door" component={ClosedDoor} />
+        <Route
+          path="/closed-door"
+          component={() => <ClosedDoor inventory={inventory} />}
+        />
         <Route
           path="/red-room"
           component={() => (
@@ -39,6 +42,7 @@ export function App() {
             />
           )}
         />
+        <Route path="/success" component={Success} />
       </Router>
       <div aria-live="polite">
         <h2>Inventory</h2>

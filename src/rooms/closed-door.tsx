@@ -1,9 +1,18 @@
 import { useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { Link } from "preact-router";
+import { InventoryItem } from "../types";
 
-export const ClosedDoor = () => {
+type Props = {
+  inventory: InventoryItem[];
+};
+
+export const ClosedDoor = ({ inventory }: Props) => {
   const [displayInfo, setDisplayInfo] = useState(false);
+  const hasRedKey = inventory.includes("red-key");
+  const hasBlueKey = inventory.includes("blue-key");
+  const isOpen = hasRedKey && hasBlueKey;
+  const feedbackId = "door-feedback";
 
   const handleOpeningDoor = () => {
     setDisplayInfo(true);
@@ -18,13 +27,38 @@ export const ClosedDoor = () => {
         left, there is a door with a <i>Red</i> handle. On your right, there is
         a door with a <i>Blue</i> handle.
       </p>
-      <button type="button" onClick={handleOpeningDoor}>
-        Open Door
-      </button>
+      {isOpen ? (
+        <Link href="/success">Open Door</Link>
+      ) : (
+        <button
+          type="button"
+          aria-disabled={true}
+          onClick={handleOpeningDoor}
+          aria-describedby={displayInfo ? feedbackId : undefined}
+        >
+          Open Door
+        </button>
+      )}
       <div aria-live="assertive">
-        <p hidden={!displayInfo}>
-          The door is locked. You need a <i>Blue</i> and a <i>Red</i> key to
-          open it.
+        <p id={feedbackId} hidden={!displayInfo}>
+          The door is locked. You need{" "}
+          {hasBlueKey ? (
+            ""
+          ) : (
+            <>
+              a <i>Blue</i> key
+            </>
+          )}
+          {!hasBlueKey && !hasRedKey ? "and " : ""}
+          {hasRedKey ? (
+            ""
+          ) : (
+            <>
+              {" "}
+              a <i>Red</i> key
+            </>
+          )}{" "}
+          to open it.
         </p>
       </div>
       <Link href="/red-room">Go to the Red Room</Link>

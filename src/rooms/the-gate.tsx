@@ -30,9 +30,9 @@ export const TheGate = () => {
           )}
         </>
       ) : (
-        <a role="link" aria-disabled="true">
+        <button type="button" aria-disabled="true">
           Enter the gate
-        </a>
+        </button>
       )}
 
       <button
