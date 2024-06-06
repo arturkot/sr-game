@@ -1,4 +1,3 @@
-import "./app.css";
 import Router, { Route } from "preact-router";
 import { TheGate } from "./rooms/the-gate";
 import { titleUpdaterContainerId } from "./utils/title-updater";

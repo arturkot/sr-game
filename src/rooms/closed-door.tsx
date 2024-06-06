@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { Link } from "preact-router";
 import { InventoryItem } from "../types";
+import { BgUpdater } from "../utils/bg-updater";
 
 type Props = {
   inventory: InventoryItem[];
@@ -20,6 +21,7 @@ export const ClosedDoor = ({ inventory }: Props) => {
 
   return (
     <>
+      <BgUpdater color="lightyellow" />
       <TitleUpdater title="Closed Door" />
       <h1>Closed Door</h1>
       <p>

@@ -1,6 +1,7 @@
 import { useRef, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { Link } from "preact-router";
+import { BgUpdater } from "../utils/bg-updater";
 
 type Props = {
   hasKey: boolean;
@@ -30,6 +31,7 @@ export const RedRoom = ({ hasKey, onGetKey }: Props) => {
 
   return (
     <div>
+      <BgUpdater color="orangered" />
       <TitleUpdater
         title={hasKey ? "Red Room: you have the red key" : "Red Room"}
       />

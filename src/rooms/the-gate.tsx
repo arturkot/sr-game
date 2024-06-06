@@ -2,6 +2,7 @@ import { Link } from "preact-router";
 import { createPortal } from "preact/compat";
 import { useId, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
+import { BgUpdater } from "../utils/bg-updater";
 
 export const TheGate = () => {
   const id = useId();
@@ -11,6 +12,7 @@ export const TheGate = () => {
 
   return (
     <>
+      <BgUpdater color="lightslategray" />
       <TitleUpdater title="The Gate" />
       <h1>The Gate</h1>
       <p>
