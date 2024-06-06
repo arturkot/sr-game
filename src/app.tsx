@@ -5,6 +5,7 @@ import { titleUpdaterContainerId } from "./utils/title-updater";
 import { ClosedDoor } from "./rooms/closed-door";
 import { RedRoom } from "./rooms/red-room";
 import { useState } from "preact/hooks";
+import { BlueRoom } from "./rooms/blue-room";
 
 type InventoryItem = "red-key" | "blue-key";
 
@@ -26,6 +27,15 @@ export function App() {
             <RedRoom
               hasKey={inventory.includes("red-key")}
               onGetKey={() => addItem("red-key")}
+            />
+          )}
+        />
+        <Route
+          path="/blue-room"
+          component={() => (
+            <BlueRoom
+              hasKey={inventory.includes("blue-key")}
+              onGetKey={() => addItem("blue-key")}
             />
           )}
         />
