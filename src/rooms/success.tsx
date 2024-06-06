@@ -4,7 +4,7 @@ export const Success = () => {
   return (
     <>
       <TitleUpdater title="Well done!" />
-      <h1>Well done!</h1>
+      <h1>Well done! Confetti all around!</h1>
       <p>You have reached the end of this short game. Wooo hooo!</p>
     </>
   );
