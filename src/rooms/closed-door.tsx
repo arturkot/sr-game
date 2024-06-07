@@ -8,6 +8,20 @@ type Props = {
   inventory: InventoryItem[];
 };
 
+const getFeedbackText = (hasRedKey: boolean, hasBlueKey: boolean) => {
+  if (hasRedKey && hasBlueKey) {
+    return "The door is now open!";
+  } else {
+    return (
+      "The door is locked. You need " +
+      (hasRedKey ? "" : "a Red key") +
+      (!hasRedKey && !hasBlueKey ? " and " : "") +
+      (hasBlueKey ? "" : "a Blue key") +
+      " to open it."
+    );
+  }
+};
+
 export const ClosedDoor = ({ inventory }: Props) => {
   const [displayInfo, setDisplayInfo] = useState(false);
   const hasRedKey = inventory.includes("red-key");
@@ -43,24 +57,7 @@ export const ClosedDoor = ({ inventory }: Props) => {
       )}
       <div aria-live="assertive">
         <p id={feedbackId} hidden={!displayInfo}>
-          The door is locked. You need{" "}
-          {hasBlueKey ? (
-            ""
-          ) : (
-            <>
-              a <i>Blue</i> key
-            </>
-          )}
-          {!hasBlueKey && !hasRedKey ? "and " : ""}
-          {hasRedKey ? (
-            ""
-          ) : (
-            <>
-              {" "}
-              a <i>Red</i> key
-            </>
-          )}{" "}
-          to open it.
+          {getFeedbackText(hasRedKey, hasBlueKey)}
         </p>
       </div>
       <Link href="/red-room">Go to the Red Room</Link>
