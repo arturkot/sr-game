@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { Link } from "preact-router";
 import { BgUpdater } from "../utils/bg-updater";
+import { Fragment } from "preact/jsx-runtime";
 
 type Props = {
   hasKey: boolean;
@@ -166,20 +167,21 @@ export const BlueRoom = ({ hasKey, onGetKey }: Props) => {
           <h2>Unlock the door</h2>
           <fieldset>
             <legend for="third-portal-puzzle">
-              What's the sum of {firstNumber} and {secondNumber}?
+              {`What's the sum of ${firstNumber} and ${secondNumber}?`}
             </legend>
             {answers.map((answer) => (
-              <label key={answer}>
-                <input
-                  type="radio"
-                  id="third-portal-puzzle"
-                  name="answer"
-                  value={answer}
-                  required={true}
-                  onChange={() => setIsWrongAnswer(false)}
-                />
-                {answer}
-              </label>
+              <Fragment key={answer}>
+                <label>
+                  It's {answer}
+                  <input
+                    type="radio"
+                    name="answer"
+                    value={answer}
+                    required={true}
+                    onChange={() => setIsWrongAnswer(false)}
+                  />
+                </label>
+              </Fragment>
             ))}
             <div aria-live="assertive">
               <p hidden={!isWrongAnswer}>Wrong answer! Try again.</p>
