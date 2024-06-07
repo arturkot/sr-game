@@ -9,6 +9,11 @@ import { InventoryItem } from "./types";
 import { Success } from "./rooms/success";
 import { Intro } from "./rooms/intro";
 
+const itemDictionary: Record<InventoryItem, string> = {
+  "red-key": "Red Key",
+  "blue-key": "Blue Key",
+};
+
 export function App() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const addItem = (item: InventoryItem) =>
@@ -57,7 +62,7 @@ export function App() {
         {hasInventory ? (
           <ul>
             {inventory.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item}>{itemDictionary[item]}</li>
             ))}
           </ul>
         ) : (
