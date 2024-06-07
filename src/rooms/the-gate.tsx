@@ -1,14 +1,23 @@
 import { Link } from "preact-router";
 import { createPortal } from "preact/compat";
-import { useId, useState } from "preact/hooks";
+import { useEffect, useId, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { BgUpdater } from "../utils/bg-updater";
 
-export const TheGate = () => {
+type Props = {
+  path?: string;
+  onActivate: () => void;
+};
+
+export const TheGate = ({ onActivate }: Props) => {
   const id = useId();
   const [isUsingLeftHand, setIsUsingLeftHand] = useState(false);
   const [isUsingRightHand, setIsUsingRightHand] = useState(false);
   const isUsingBothHands = isUsingLeftHand && isUsingRightHand;
+
+  useEffect(() => {
+    onActivate();
+  }, []);
 
   return (
     <>

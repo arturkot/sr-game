@@ -1,10 +1,12 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
-import { Link } from "preact-router";
+import { Link, route } from "preact-router";
 import { InventoryItem } from "../types";
 import { BgUpdater } from "../utils/bg-updater";
 
 type Props = {
+  counterStart: number;
+  path?: string;
   inventory: InventoryItem[];
 };
 
@@ -22,7 +24,7 @@ const getFeedbackText = (hasRedKey: boolean, hasBlueKey: boolean) => {
   }
 };
 
-export const ClosedDoor = ({ inventory }: Props) => {
+export const ClosedDoor = ({ counterStart, inventory }: Props) => {
   const [displayInfo, setDisplayInfo] = useState(false);
   const hasRedKey = inventory.includes("red-key");
   const hasBlueKey = inventory.includes("blue-key");
@@ -32,6 +34,10 @@ export const ClosedDoor = ({ inventory }: Props) => {
   const handleOpeningDoor = () => {
     setDisplayInfo(true);
   };
+
+  useEffect(() => {
+    if (!counterStart) route("/");
+  }, []);
 
   return (
     <>

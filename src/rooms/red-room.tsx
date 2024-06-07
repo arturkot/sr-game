@@ -1,18 +1,24 @@
-import { useRef, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
-import { Link } from "preact-router";
+import { Link, route } from "preact-router";
 import { BgUpdater } from "../utils/bg-updater";
 
 type Props = {
+  counterStart: number;
+  path?: string;
   hasKey: boolean;
   onGetKey: () => void;
 };
 
-export const RedRoom = ({ hasKey, onGetKey }: Props) => {
+export const RedRoom = ({ counterStart, hasKey, onGetKey }: Props) => {
   const getKeyBtnRef = useRef<HTMLButtonElement>(null);
   const [isLocked, setIsLocked] = useState(!hasKey);
   const [displayLockedInfo, setDisplayLockedInfo] = useState(false);
   const feedbackId = "feedback-locked-info";
+
+  useEffect(() => {
+    if (!counterStart) route("/");
+  }, []);
 
   const handleGettingTheKey = () => {
     if (isLocked) {

@@ -2,7 +2,11 @@ import { TitleUpdater } from "../utils/title-updater";
 import "./intro.css";
 import { Link } from "preact-router";
 
-export const Intro = () => {
+type Props = {
+  path?: string;
+};
+
+export const Intro = ({}: Props) => {
   return (
     <div className="intro">
       <TitleUpdater title="The Screen Reader Game" />
