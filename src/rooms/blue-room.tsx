@@ -183,9 +183,7 @@ export const BlueRoom = ({ hasKey, onGetKey }: Props) => {
                 </label>
               </Fragment>
             ))}
-            <div aria-live="assertive">
-              <p hidden={!isWrongAnswer}>Wrong answer! Try again.</p>
-            </div>
+            {isWrongAnswer && <p role="alert">Wrong answer! Try again.</p>}
           </fieldset>
 
           <button type="submit">Enter the door</button>
