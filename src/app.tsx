@@ -7,6 +7,7 @@ import { useState } from "preact/hooks";
 import { BlueRoom } from "./rooms/blue-room";
 import { InventoryItem } from "./types";
 import { Success } from "./rooms/success";
+import { Intro } from "./rooms/intro";
 
 export function App() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -18,7 +19,8 @@ export function App() {
     <>
       <div id={titleUpdaterContainerId} />
       <Router>
-        <Route path="/" component={TheGate} />
+        <Route path="/" component={Intro} />
+        <Route path="/the-gate" component={TheGate} />
         <Route
           path="/closed-door"
           component={() => <ClosedDoor inventory={inventory} />}
@@ -43,7 +45,14 @@ export function App() {
         />
         <Route path="/success" component={Success} />
       </Router>
-      <div aria-live="polite">
+      <section
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          left: 0,
+          bottom: 0,
+        }}
+      >
         <h2>Inventory</h2>
         {hasInventory ? (
           <ul>
@@ -54,7 +63,7 @@ export function App() {
         ) : (
           <p>Inventory is empty</p>
         )}
-      </div>
+      </section>
     </>
   );
 }

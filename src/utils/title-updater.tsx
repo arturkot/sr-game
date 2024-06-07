@@ -16,7 +16,7 @@ export const TitleUpdater = ({ title }: Props) => {
   }, [title]);
 
   return createPortal(
-    <p ref={announcerRef} tabIndex={-1}>
+    <p ref={announcerRef} tabIndex={-1} style={{ position: "absolute" }}>
       {title}
     </p>,
     document.getElementById(titleUpdaterContainerId)!,
