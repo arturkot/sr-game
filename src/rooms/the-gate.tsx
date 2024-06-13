@@ -1,5 +1,4 @@
 import { Link } from "preact-router";
-import { createPortal } from "preact/compat";
 import { useEffect, useId, useState } from "preact/hooks";
 import { TitleUpdater } from "../utils/title-updater";
 import { BgUpdater } from "../utils/bg-updater";
@@ -28,23 +27,19 @@ export const TheGate = ({ onActivate }: Props) => {
         You're standing in front of a gate in the middle of nowhere. It's a big,
         iron gate.
       </p>
-      {isUsingBothHands ? (
-        <>
-          <Link href="/closed-door" aria-describedby={id}>
-            Enter the gate
-          </Link>
-          {createPortal(
-            <p id={id}>
-              You can hear the loud creaking of the gate as it opens.
-            </p>,
-            document.body,
-          )}
-        </>
-      ) : (
-        <button type="button" aria-disabled="true">
-          Enter the gate
-        </button>
-      )}
+
+      <Link
+        role="link"
+        href={isUsingBothHands ? "/closed-door" : undefined}
+        aria-describedby={id}
+        aria-disabled={!isUsingBothHands}
+      >
+        Enter the gate
+      </Link>
+      <p id={id}>
+        {isUsingBothHands &&
+          "You can hear the loud creaking of the gate as it opens."}
+      </p>
 
       <button
         type="button"
