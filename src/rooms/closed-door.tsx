@@ -49,18 +49,17 @@ export const ClosedDoor = ({ counterStart, inventory }: Props) => {
         left, there is a door with a <i>Red</i> handle. On your right, there is
         a door with a <i>Blue</i> handle.
       </p>
-      {isOpen ? (
-        <Link href="/success">Open Door</Link>
-      ) : (
-        <button
-          type="button"
-          aria-disabled={true}
-          onClick={handleOpeningDoor}
-          aria-describedby={displayInfo ? feedbackId : undefined}
-        >
-          Open Door
-        </button>
-      )}
+
+      <Link
+        role="link"
+        href={isOpen ? "/success" : undefined}
+        aria-disabled={!isOpen}
+        onClick={handleOpeningDoor}
+        aria-describedby={displayInfo ? feedbackId : undefined}
+      >
+        Open Door
+      </Link>
+
       <div aria-live="assertive">
         <p id={feedbackId} hidden={!displayInfo}>
           {getFeedbackText(hasRedKey, hasBlueKey)}
