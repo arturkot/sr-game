@@ -51,7 +51,9 @@ export const Success = ({ counterStart }: Props) => {
         <strong>{formatTimestamp(completionTime)}</strong>.
       </p>
       <p className="success">
-        <a href="/">Play again?</a>
+        <a href="/" data-native>
+          Play again?
+        </a>
       </p>
     </>
   );
